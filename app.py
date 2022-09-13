@@ -1,6 +1,8 @@
+from operator import index
 from unittest import result
 import numpy as np
 import streamlit as st
+from PIL import Image
 import pickle
 
 
@@ -9,30 +11,32 @@ pipe = pickle.load(open('pipe.pkl','rb'))
 df = pickle.load(open('df.pkl','rb'))
 
 st.title("Diabetics  Predictor")
+img=Image.open("diabetics.jpg")
+st.image(img, width=200)
 
 # Number of Pregnency
-No_pregent = st.selectbox('Pregnancies',df['Pregnancies'].unique())
+No_pregent = st.selectbox('Pregnancies',df['Pregnancies'].unique(),index=2 )
 
 # Level  of Glucose
 Glucose_level = st.selectbox('Glucose',df['Glucose'].unique())
 
 # # Ram
-blood_pressure = st.number_input('Blood Pressure)')
+blood_pressure = st.number_input('Blood Pressure)', min_value=1,step=1)
 
 # weight
-skinThickness= st.number_input('	SkinThickness	')
+skinThickness= st.number_input('SkinThickness	', min_value=1,step=1)
 
 # # Touchscreen
-insulin_level= st.number_input('	Insulin	')
+insulin_level= st.number_input('nsulin	', min_value=1,step=1)
 
 # # IPS
-bmi= st.number_input('BMI')
+bmi= st.number_input('BMI', min_value=1,step=1)
 	
 # # screen size
-diabetes_pedigree_function= st.number_input('DiabetesPedigreeFunction')
+diabetes_pedigree_function= st.number_input('DiabetesPedigreeFunction', min_value=1,step=1)
 
 # # resolution
-age= st.number_input('Age')
+age= st.number_input('Age', min_value=1,step=1)
 
 
 if st.button('Predict Status') :
